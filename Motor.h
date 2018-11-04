@@ -6,8 +6,8 @@
 #define HAS(X, Y) ((X) & (Y))
 
 #define ENABLE_PIN_NUMBER 2
-#define M0_PIM_NUMBER 3
-#define M1_PIM_NUMBER 4
+#define M0_PIN_NUMBER 3
+#define M1_PIN_NUMBER 4
 #define CLOCK_PIN_NUMBER 8
 #define DIRECTION_PIN_NUMBER 9
 
@@ -29,7 +29,12 @@ typedef enum _DIRECTION {
 
 class Motor {
 private:
-  uint8_t pin;
+  uint8_t enablePin;
+  uint8_t directionPin;
+  uint8_t clockPin;
+  uint8_t M0Pin;
+  uint8_t M1Pin;
+  
   uint8_t direction = RIGHT;
   uint16_t clocksPerStep = 0x02;
 
@@ -39,9 +44,9 @@ private:
   void oneClock(int pinNumber, double clockCycle);
 
 public:
-  Motor(int pin);
+  Motor(uint8_t EN, uint8_t DIR, uint8_t CLK, uint8_t M0, uint8_t M1);
 
-  void setStepMode(Mode mode);
+  void setStepMode(uint8_t mode);
   void setDirection(uint8_t direction);
 
   void rotate(double rotations, double speed);

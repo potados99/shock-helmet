@@ -1,19 +1,28 @@
 #include "Motor.h"
 
-Motor::Motor(int pin);
+Motor::Motor(uint8_t EN, uint8_t DIR, uint8_t CLK, uint8_t M0, uint8_t M1) {
+  this->enablePin = EN;
+  this->directionPin = DIR;
+  this->clockPin = CLK;
+  this->M0Pin = M0;
+  this->M1Pin = M1;
+  
+  initPins();
+  enable(true);
+}
 
-void Motor::setStepMode(Mode mode) {
-  pinMode(MODE0_PIM_NUMBER, OUTPUT);
-  pinMode(MODE1_PIM_NUMBER, OUTPUT);
+void Motor::setStepMode(uint8_t mode) {
+  pinMode(this->M0Pin, OUTPUT);
+  pinMode(this->M1Pin, OUTPUT);
 
-  digitalWrite(MODE0_PIM_NUMBER, HAS(mode & 0x02));
-  digitalWrite(MODE1_PIM_NUMBER, HAS(mode & 0x01));
+  digitalWrite(this->M0Pin, HAS(mode, 0x02));
+  digitalWrite(this->M1Pin, HAS(mode, 0x01));
 
-  this->clocksPerStep = 0x01 << (4 - _mode);
+  this->clocksPerStep = 0x01 << (4 - mode);
 }
 
 void Motor::setDirection(uint8_t direction) {
-  digitalWrite(this->pin, (direction == LEFT) ? HIGH : LOW);
+  digitalWrite(this->directionPin, (direction == LEFT) ? HIGH : LOW);
 }
 
 void Motor::rotate(double rotations, double speed) {
@@ -27,18 +36,18 @@ void Motor::rotate(double rotations, double speed) {
   double totalClocks          = clocksPerStep * STEPS_PER_ROTAION * rotations; // 400
 
   for (unsigned register int i = 0; i < totalClocks; ++ i) {
-     oneClock(CLOCK_PIN_NUMBER, clockCycle);
+     oneClock(this->clockPin, clockCycle);
   }
 }
 
 void Motor::initPins() {
-  pinMode(CLOCK_PIN_NUMBER, OUTPUT);
-  pinMode(DIRECTION_PIN_NUMBER, OUTPUT);
-  pinMode(ENABLE_PIN_NUMBER, OUTPUT);
+  pinMode(this->clockPin, OUTPUT);
+  pinMode(this->directionPin, OUTPUT);
+  pinMode(this->enablePin, OUTPUT);
 }
 
 void Motor::enable(bool enable) {
-  digitalWrite(ENABLE_PIN_NUMBER, enable ? HIGH : LOW);
+  digitalWrite(this->enablePin, enable ? HIGH : LOW);
 }
 
 void Motor::oneClock(int pinNumber, double clockCycle) {
