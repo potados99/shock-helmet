@@ -6,7 +6,7 @@ Motor::Motor(uint8_t EN, uint8_t DIR, uint8_t CLK, uint8_t M0, uint8_t M1) {
   this->clockPin = CLK;
   this->M0Pin = M0;
   this->M1Pin = M1;
-  
+
   initPins();
   enable(true);
 }
