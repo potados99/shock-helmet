@@ -1,2 +1,7 @@
 # shock-helmet
-Provides a shock to whom wearing this helmet.
+
+츙격을 주는 헬멧입니다. 충격적입니다.
+
+## 기능
+
+사용자의 머리에 충격을 줍니다.
