@@ -1,15 +1,15 @@
 #include "Motor.h"
 
 Motor myMotor(3, 4, 2, 5, 6);
+// enable, direction, clock, m0, m1
 
 void setup() {
   myMotor.setDirection(LEFT);
-  myMotor.setStepMode(HALF_STEP);
+  myMotor.setStepMode(HALF_STEP); // fast and unstable
 }
 
 void loop() {
   // default 16th step mode, right direction.
-  // for clock controled step motor driver.
   myMotor.rotate(0.3, 200);
   myMotor.setDirection(RIGHT);
   myMotor.rotate(0.3, 200);
