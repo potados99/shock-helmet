@@ -3,6 +3,13 @@
 
 #include "Arduino.h"
 
-void
+void SerialTask() {
+  if (! Serial.available()) return;
+
+
+}
+
+
+
 
 #endif
