@@ -1,5 +1,5 @@
-#ifndef _Motor_h
-#define _Motor_h
+#ifndef _MOTOR_H
+#define _MOTOR_H
 
 #include "Arduino.h"
 
@@ -34,7 +34,7 @@ private:
   uint8_t clockPin;
   uint8_t M0Pin;
   uint8_t M1Pin;
-  
+
   uint8_t direction = RIGHT;
   uint16_t clocksPerStep = 0x02;
 
