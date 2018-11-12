@@ -5,15 +5,14 @@
 
 #define RECIEVE_BUFFER_SIZE 8
 
-typedef void (*callback)(byte*);
+typedef void (*callback)(String);
 
 class SerialWrapper {
 private:
   HardwareSerial  *serial;
 
-  byte            recievedBytes[RECIEVE_BUFFER_SIZE];
-  uint8_t         byteIndex = 0;
-  byte            incommingByte;
+  String          recievedString;
+  char            incomming;
   char            terminate;
 
   bool            serialRegistered = false;
@@ -23,13 +22,13 @@ private:
   void            triggerCallback();
 
   void            clearBuffer();
-  void            appendToBuffer(byte b);
+  void            appendToBuffer(char b);
 
 public:
   SerialWrapper();
 
   void            registerSerial(HardwareSerial *serial);
-  void            registerCallback(byte terminate, callback cb);
+  void            registerCallback(char terminate, callback cb);
   void            loop();
 };
 

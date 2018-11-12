@@ -6,11 +6,11 @@ Motor myMotor(3, 4, 2, 5, 6);
 
 SerialWrapper serialWrapper;
 
-void dataRecieved(byte *data);
+void dataRecieved(String data);
 
 void setup() {
   serialWrapper.registerSerial(&Serial);
-  serialWrapper.registerCallback(0xFF, dataRecieved);
+  serialWrapper.registerCallback('\n', dataRecieved);
 }
 
 void loop() {
@@ -23,15 +23,12 @@ void loop() {
   serialWrapper.loop();
 }
 
-void dataRecieved(byte *data) {
-  Serial.println((uint8_t)data[0]);
+void dataRecieved(String data) {
+  Serial.println(data[0]);
 
-  for (uint8_t i = 0; i < data[0]; ++ i) {
-    myMotor.setDirection(LEFT);
-    myMotor.rotate(0.1, 20);
-    myMotor.setDirection(RIGHT);
-    myMotor.rotate(0.1, 20);
-  }
-
+  myMotor.setDirection(LEFT);
+  myMotor.rotate(0.1, 20);
+  myMotor.setDirection(RIGHT);
+  myMotor.rotate(0.1, 20);
 
 }
