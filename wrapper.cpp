@@ -27,14 +27,18 @@ void loop() {
 void dataRecieved(String data) {
   uint8_t times = (uint8_t)strtol(data.substring(0, 2).c_str(), 0, 16);
   uint8_t speed = (uint8_t)strtol(data.substring(2, 4).c_str(), 0, 16);
+  uint8_t _delay = (uint8_t)strtol(data.substring(4, 6).c_str(), 0, 16);
+  uint8_t angle = (uint8_t)strtol(data.substring(6, 8).c_str(), 0, 16);
 
   static uint8_t direction = LEFT;
 
   for (uint8_t i = 0; i < times; ++ i) {
     myMotor.setDirection(direction);
-    myMotor.rotate(0.77, speed * 3);
+    myMotor.rotate((double)angle / 100, speed * 3);
 
     if (direction == LEFT) direction = RIGHT;
     else if (direction == RIGHT) direction = LEFT;
+
+    delay(_delay);
   }
 }
