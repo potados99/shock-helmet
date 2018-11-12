@@ -12,6 +12,8 @@ void setup() {
   serialWrapper.registerSerial(&Serial);
   serialWrapper.registerCallback('\n', dataRecieved);
   myMotor.setStepMode(SIXTEENTH_STEP);
+  myMotor.rotate(1, 60);
+
 }
 
 void loop() {
