@@ -11,6 +11,7 @@ void dataRecieved(String data);
 void setup() {
   serialWrapper.registerSerial(&Serial);
   serialWrapper.registerCallback('\n', dataRecieved);
+  myMotor.setStepMode(SIXTEENTH_STEP);
 }
 
 void loop() {
@@ -24,11 +25,16 @@ void loop() {
 }
 
 void dataRecieved(String data) {
-  Serial.println(data[0]);
+  uint8_t times = (uint8_t)strtol(data.substring(0, 2).c_str(), 0, 16);
+  uint8_t speed = (uint8_t)strtol(data.substring(2, 4).c_str(), 0, 16);
 
-  myMotor.setDirection(LEFT);
-  myMotor.rotate(0.1, 20);
-  myMotor.setDirection(RIGHT);
-  myMotor.rotate(0.1, 20);
+  static uint8_t direction;
 
+  for (uint8_t i = 0; i < times; ++ i) {
+    if (direction == LEFT) direction = RIGHT;
+    else if (direction == RIGHT) direction = LEFT;
+
+    myMotor.setDirection(direction);
+    myMotor.rotate(0.7, speed * 1.5);
+  }
 }
