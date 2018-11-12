@@ -8,7 +8,7 @@ Motor::Motor(uint8_t EN, uint8_t DIR, uint8_t CLK, uint8_t M0, uint8_t M1) {
   this->M1Pin = M1;
 
   initPins();
-  enable(true);
+  enable(false);
 }
 
 void Motor::setStepMode(uint8_t mode) {
@@ -35,9 +35,13 @@ void Motor::rotate(double rotations, double speed) {
 
   double totalClocks          = clocksPerStep * STEPS_PER_ROTAION * rotations; // 400
 
+  enable(true);
+
   for (unsigned register int i = 0; i < totalClocks; ++ i) {
      oneClock(this->clockPin, clockCycle);
   }
+  
+  enable(false);
 }
 
 void Motor::initPins() {

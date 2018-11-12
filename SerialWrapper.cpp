@@ -35,7 +35,7 @@ void SerialWrapper::registerCallback(char terminate, callback cb) {
     this->onRecieved = cb;
     this->callbackRegistered = true;
   }
-  
+
   this->terminate = terminate;
 }
 
