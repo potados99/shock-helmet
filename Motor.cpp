@@ -40,7 +40,7 @@ void Motor::rotate(double rotations, double speed) {
   for (unsigned register int i = 0; i < totalClocks; ++ i) {
      oneClock(this->clockPin, clockCycle);
   }
-  
+
   enable(false);
 }
 
