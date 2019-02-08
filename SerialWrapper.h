@@ -30,14 +30,14 @@ private:
   /* 데이터가 도착했을 때 실행할 콜백. */
   callback        onReceived;
 
-  /* 콜백을 안전하게 실행. */
+  /* 콜백을 안전하게 실행합니다. */
   void            triggerCallback();
 
-  /* receivedString을 초기화. */
+  /* receivedString을 초기화합니다. */
   void            clearBuffer();
 
   /**
-   * receivedString에 바이트 추가.
+   * receivedString에 바이트를 추가합니다.
    * @param b           추가할 문자 바이트.
    */
   void            appendToBuffer(char b);
@@ -46,19 +46,19 @@ public:
   SerialWrapper();
 
   /**
-   * HardwareSerial   객체를 등록.
+   * HardwareSerial 객체를 등록합니다.
    * @param serial    등록할 시리얼 객체.
    */
   void            registerSerial(HardwareSerial *serial);
 
   /**
-   * 콜백을 등록.
+   * 콜백을 등록합니다.
    * @param terminate   데이터의 끝을 알리는 문자.
    * @param cb          등록할 콜백.
    */
   void            registerCallback(char terminate, callback cb);
 
-  /* 호출될 때 마다 작업을 수행. loop()에서 반드시 호출해주어야 함. */
+  /* 호출될 때 마다 작업을 수행합니다. loop()에서 반드시 호출해주어야 합니다. */
   void            loop();
 };
 
