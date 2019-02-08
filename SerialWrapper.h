@@ -7,20 +7,33 @@
 
 typedef void (*callback)(String);
 
+/**
+ * 아두이노의 HardwareSerial 클래스와 콜백을 사용한 시리얼 통신 클래스입니다.
+ */
 class SerialWrapper {
 private:
   HardwareSerial  *serial;
 
-  String          recievedString;
+  /* 도착한 바이트들을 이어붙여 저장하는 문자열. */
+  String          receivedString;
+
+  /* 막 도착한 문자 바이트. */
   char            incomming;
+
+  /* 이 문자가 도착하면 데이터가 끝난 것으로 간주하고 콜백을 실행. */
   char            terminate;
 
+  /* 콜백을 실행할 조건이 갖추어졌는지 확인하는 플래그. */
   bool            serialRegistered = false;
   bool            callbackRegistered = false;
 
-  callback        onRecieved;
+  /* 데이터가 도착했을 때 실행할 콜백. */
+  callback        onReceived;
+
+  /* 콜백을 안전하게 실행. */
   void            triggerCallback();
 
+  /* re */
   void            clearBuffer();
   void            appendToBuffer(char b);
 

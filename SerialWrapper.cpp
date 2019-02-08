@@ -3,16 +3,16 @@
 void SerialWrapper::triggerCallback() {
   if (! this->callbackRegistered) return; // exception
 
-  this->onRecieved(this->recievedString);
+  this->onRecieved(this->receivedString);
 }
 
 void SerialWrapper::clearBuffer() {
-  this->recievedString = "";
+  this->receivedString = "";
 }
 
 void SerialWrapper::appendToBuffer(char b) {
-  this->recievedString += b;
-  Serial.println(this->recievedString);
+  this->receivedString += b;
+  Serial.println(this->receivedString);
 }
 
 
@@ -32,7 +32,7 @@ void SerialWrapper::registerSerial(HardwareSerial *serial) {
 
 void SerialWrapper::registerCallback(char terminate, callback cb) {
   if (cb != nullptr) {
-    this->onRecieved = cb;
+    this->onReceived = cb;
     this->callbackRegistered = true;
   }
 
