@@ -33,15 +33,32 @@ private:
   /* 콜백을 안전하게 실행. */
   void            triggerCallback();
 
-  /* re */
+  /* receivedString을 초기화. */
   void            clearBuffer();
+
+  /**
+   * receivedString에 바이트 추가.
+   * @param b           추가할 문자 바이트.
+   */
   void            appendToBuffer(char b);
 
 public:
   SerialWrapper();
 
+  /**
+   * HardwareSerial   객체를 등록.
+   * @param serial    등록할 시리얼 객체.
+   */
   void            registerSerial(HardwareSerial *serial);
+
+  /**
+   * 콜백을 등록.
+   * @param terminate   데이터의 끝을 알리는 문자.
+   * @param cb          등록할 콜백.
+   */
   void            registerCallback(char terminate, callback cb);
+
+  /* 호출될 때 마다 작업을 수행. loop()에서 반드시 호출해주어야 함. */
   void            loop();
 };
 

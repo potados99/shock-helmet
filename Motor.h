@@ -27,6 +27,10 @@ typedef enum _DIRECTION {
   LEFT = 1
 } DIRECTION;
 
+/**
+ * 스텝모터를 클럭 펄스로 제어할 때 사용하는 클래스입니다.
+ * 이 프로젝트에서는 더이상 사용하지 않습니다.
+ */
 class Motor {
 private:
   uint8_t enablePin;

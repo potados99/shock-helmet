@@ -40,7 +40,7 @@ void SerialWrapper::registerCallback(char terminate, callback cb) {
 }
 
 void SerialWrapper::loop() {
-  if (! this->serialRegistered) return; //exception
+  if (! this->serialRegistered) return;
   if (! this->callbackRegistered) return;
 
   if (! this->serial->available()) return;
